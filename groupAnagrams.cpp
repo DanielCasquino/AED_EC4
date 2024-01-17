@@ -5,39 +5,46 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> m;
-		for(string s : strs){
-			string t = s;
+	vector<vector<string>> groupAnagrams(vector<string> &strs)
+	{
+		unordered_map<string, vector<string>> m;
+		for (string s : strs)
+		{
+			auto t = s;
 			sort(t.begin(), t.end());
+			auto res = m.find(s);
 			m[t].push_back(s);
 		}
+
 		vector<vector<string>> ans;
-		for(auto p : m){
-			ans.push_back(p.second);
+		for (auto pair : m)
+		{
+			ans.push_back(pair.second);
 		}
 		return ans;
-    };
+	};
 };
 
-void test(){
-	vector<string> strs = {"eat","tea","tan","ate","nat","bat"};
-	vector<vector<string>> ans = {{"bat"},{"tan","nat"},{"eat","tea","ate"}};
+void test()
+{
+	vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+	vector<vector<string>> ans = {{"bat"}, {"tan", "nat"}, {"eat", "tea", "ate"}};
 	assert(Solution().groupAnagrams(strs) == ans);
-	
+
 	strs = {""};
 	ans = {{""}};
 	assert(Solution().groupAnagrams(strs) == ans);
-	
+
 	strs = {"a"};
 	ans = {{"a"}};
 	assert(Solution().groupAnagrams(strs) == ans);
-
 }
 
-int main(){
+int main()
+{
 	test();
 	return 0;
 }
